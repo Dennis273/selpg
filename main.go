@@ -25,7 +25,6 @@ func main() {
 		fmt.Printf("Invalid arguments\nAborted")
 	}
 	readFile(args)
-
 }
 
 func parseArgs() cliArgs {
@@ -35,6 +34,7 @@ func parseArgs() cliArgs {
 	var pageLength = flag.IntP("length", "l", 72, "Page Length")
 	var pageBreak = flag.BoolP("formFeed", "f", false, "Form feed")
 	var destination = flag.StringP("destination", "d", "", "Target")
+
 	flag.Parse()
 
 	args.startPage = *startPage
@@ -45,6 +45,7 @@ func parseArgs() cliArgs {
 	args.source = flag.Args()[0]
 	return args
 }
+
 func checkArgs(args cliArgs) bool {
 	var valid = true
 	if args.endPage < 0 || args.startPage < 0 || args.startPage > args.endPage {
@@ -53,6 +54,7 @@ func checkArgs(args cliArgs) bool {
 	}
 	return valid
 }
+
 func readFile(args cliArgs) {
 	file, err := os.Open(args.source)
 	check(err)
@@ -103,6 +105,7 @@ func readFile(args cliArgs) {
 		}
 	}
 }
+
 func pipe(str string, destination string) {
 	if destination == "" {
 		fmt.Print(str)
